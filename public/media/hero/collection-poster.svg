@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">NOVECO Collection Hero Poster</title>
+  <desc id="desc">Placeholder poster for the collection flow hero video.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1917" />
+      <stop offset="55%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#064e3b" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)" />
+  <circle cx="1280" cy="180" r="170" fill="rgba(255,255,255,0.08)" />
+  <text x="80" y="710" fill="rgba(255,255,255,0.14)" font-family="Pretendard, sans-serif" font-size="200" font-weight="800" letter-spacing="-10">FLOW</text>
+</svg>

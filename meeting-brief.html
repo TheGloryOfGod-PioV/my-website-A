@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NOVECO 웹사이트 프로젝트 브리핑</title>
+<style>
+  :root {
+    --brand: #047857;
+    --brand-light: #10b981;
+    --accent: #84cc16;
+    --ink: #111827;
+    --ink-soft: #4b5563;
+    --line: #e5e7eb;
+    --bg: #f9fafb;
+    --warn: #b45309;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 28px 80px; }
+
+  header.cover {
+    background: linear-gradient(135deg, #064e3b 0%, #047857 60%, #10b981 100%);
+    color: white;
+    padding: 36px 32px;
+    border-radius: 16px;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 30px rgba(6, 78, 59, 0.15);
+  }
+  header.cover .eyebrow {
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    opacity: 0.85; margin-bottom: 8px;
+  }
+  header.cover h1 {
+    margin: 0 0 10px; font-size: 30px; font-weight: 800; letter-spacing: -0.02em;
+  }
+  header.cover p {
+    margin: 0; max-width: 720px; opacity: 0.95; font-size: 15px;
+  }
+  header.cover .meta {
+    margin-top: 18px; display: flex; gap: 18px; flex-wrap: wrap;
+    font-size: 13px; opacity: 0.9;
+  }
+  header.cover .meta span::before { content: "•"; margin-right: 8px; opacity: 0.6; }
+  header.cover .meta span:first-child::before { content: ""; margin-right: 0; }
+
+  section { margin: 32px 0; }
+  section > h2 {
+    font-size: 19px; font-weight: 700; margin: 0 0 14px;
+    padding-left: 12px; border-left: 4px solid var(--brand);
+    color: var(--ink);
+  }
+  section > h2 .num {
+    color: var(--brand); margin-right: 8px; font-weight: 800;
+  }
+
+  .card {
+    background: white; border: 1px solid var(--line);
+    border-radius: 12px; padding: 20px 22px;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 720px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+
+  .stat {
+    background: white; border: 1px solid var(--line); border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .stat .label { font-size: 12px; color: var(--ink-soft); margin-bottom: 4px; }
+  .stat .value { font-size: 22px; font-weight: 800; color: var(--brand); letter-spacing: -0.02em; }
+  .stat .sub { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+
+  table {
+    width: 100%; border-collapse: collapse; background: white;
+    border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+  }
+  th, td { padding: 11px 14px; text-align: left; font-size: 14px; vertical-align: top; }
+  th { background: #f0fdf4; color: #065f46; font-weight: 700; font-size: 13px; }
+  tr + tr td { border-top: 1px solid var(--line); }
+
+  .pill {
+    display: inline-block; padding: 3px 10px; border-radius: 999px;
+    font-size: 11px; font-weight: 600; background: #ecfdf5; color: #065f46;
+    border: 1px solid #a7f3d0;
+  }
+  .pill.warn { background: #fffbeb; color: var(--warn); border-color: #fde68a; }
+  .pill.info { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+  .pill.dark { background: #1f2937; color: white; border-color: #1f2937; }
+
+  ul.clean { list-style: none; padding: 0; margin: 0; }
+  ul.clean li {
+    padding: 8px 0; border-bottom: 1px dashed var(--line);
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  ul.clean li:last-child { border-bottom: none; }
+  ul.clean li::before {
+    content: "✓"; color: var(--brand); font-weight: 800; flex-shrink: 0;
+  }
+  ul.clean li.todo::before { content: "□"; color: var(--warn); }
+
+  .tree {
+    background: #0f172a; color: #e2e8f0; padding: 18px 20px;
+    border-radius: 10px; font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 12.5px; line-height: 1.65; overflow-x: auto;
+  }
+  .tree .c { color: #94a3b8; }
+  .tree .k { color: #34d399; }
+
+  .agenda {
+    background: white; border: 1px solid var(--line); border-radius: 12px;
+    padding: 20px 24px;
+  }
+  .agenda ol { margin: 0; padding-left: 22px; }
+  .agenda ol li { padding: 6px 0; }
+  .agenda ol li b { color: var(--brand); }
+
+  .risk-row {
+    display: grid; grid-template-columns: 110px 1fr 1fr; gap: 14px;
+    padding: 12px 0; border-bottom: 1px solid var(--line);
+  }
+  .risk-row:last-child { border-bottom: none; }
+  .risk-row .lvl { font-size: 12px; font-weight: 700; }
+  .lvl-high { color: #dc2626; }
+  .lvl-mid { color: var(--warn); }
+  .lvl-low { color: var(--brand); }
+
+  footer.foot {
+    margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line);
+    color: var(--ink-soft); font-size: 12px; text-align: center;
+  }
+
+  @media print {
+    body { background: white; }
+    header.cover { box-shadow: none; }
+    .card, table, .stat { break-inside: avoid; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="cover">
+    <div class="eyebrow">PROJECT BRIEF · 업무 회의용</div>
+    <h1>NOVECO 기업 웹사이트 — 음식물처리 솔루션 + TANNHOF 수입 가구</h1>
+    <p>
+      음식물처리 라인업과 독일 흑림 가족 공방 TANNHOF 수입 가구 라인을 한 사이트에서 다루는
+      Next.js 14 기반 반응형 기업 사이트. 운영 데이터 주입과 디자인 자산 교체만으로
+      정식 오픈 가능한 단계.
+    </p>
+    <div class="meta">
+      <span>스택: Next.js 14 · TypeScript · Tailwind CSS</span>
+      <span>렌더링: SSR + 부분 클라이언트 컴포넌트</span>
+      <span>브리핑일: 2026-04-28</span>
+    </div>
+  </header>
+
+  <section>
+    <h2><span class="num">01</span> 프로젝트 개요</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="margin:0 0 8px; font-size:15px;">목표</h3>
+        <p style="margin:0; color:var(--ink-soft);">
+          기존 ecostadisposal.com (Wayback 보존본)의 정보 구조를 참고해
+          <b>NOVECO (구 ECOSTA)</b> 브랜드의 현대적 기업 사이트로 재구축.
+          음식물처리기·수거함 + 독일 TANNHOF 수입 가구를 통합 노출.
+        </p>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 8px; font-size:15px;">디자인 톤</h3>
+        <p style="margin:0; color:var(--ink-soft);">
+          화이트 베이스 · 딥그린(emerald) 메인 · 라임 포인트.
+          제조업/환경기기의 신뢰감과 가구 브랜드의 정제된 분위기를
+          한 사이트에서 동시 전달.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span> 핵심 수치</h2>
+    <div class="grid-4">
+      <div class="stat">
+        <div class="label">제품 모델</div>
+        <div class="value">12종</div>
+        <div class="sub">가정 2 · 업소 6 · 수거함 4</div>
+      </div>
+      <div class="stat">
+        <div class="label">가구 컬렉션</div>
+        <div class="value">3 · 8점</div>
+        <div class="sub">LICHTLINIE / TAFELWERK / DUNKELRAUM</div>
+      </div>
+      <div class="stat">
+        <div class="label">주요 페이지</div>
+        <div class="value">10+</div>
+        <div class="sub">홈·회사·제품·사례·지원·문의·가구</div>
+      </div>
+      <div class="stat">
+        <div class="label">렌더링 모드</div>
+        <div class="value">SSR</div>
+        <div class="sub">상세 페이지 SSG (generateStaticParams)</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span> 사이트 구조 (라우팅)</h2>
+    <div class="tree"><span class="c">// app/ 디렉토리 구조</span>
+my-website/
+├─ app/
+│  ├─ page.tsx                    <span class="c">// 홈 (랜딩)</span>
+│  ├─ about/page.tsx              <span class="c">// 회사 소개</span>
+│  ├─ products/
+│  │  ├─ home/page.tsx            <span class="c">// 가정용 카탈로그</span>
+│  │  ├─ commercial/page.tsx      <span class="c">// 업소용 카탈로그</span>
+│  │  ├─ containers/page.tsx      <span class="c">// 수거함 카탈로그</span>
+│  │  └─ [category]/[model]/page.tsx  <span class="k">// 모델 상세 (SSG)</span>
+│  ├─ imported-furniture/         <span class="c">// TANNHOF 수입 가구</span>
+│  ├─ cases/page.tsx              <span class="c">// 인증·설치 사례</span>
+│  ├─ support/page.tsx            <span class="c">// FAQ / 고객센터</span>
+│  └─ contact/page.tsx            <span class="c">// 문의 폼</span>
+├─ components/
+│  ├─ layout/                     <span class="c">// Header · Footer · MobileMenu</span>
+│  ├─ sections/                   <span class="c">// Hero · ProductCategory · CTA 등</span>
+│  ├─ ui/                         <span class="c">// Button · Container · ProductCard ...</span>
+│  └─ forms/InquiryForm           <span class="c">// 문의 폼 (client)</span>
+└─ data/
+   ├─ company.ts · navigation.ts
+   ├─ products.ts                 <span class="k">// 12개 모델 정의</span>
+   ├─ imported-furniture.ts       <span class="k">// TANNHOF 컬렉션·8점</span>
+   └─ cases.ts</div>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span> 제품 라인업</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>카테고리</th>
+          <th>모델</th>
+          <th>대상 / 용량</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="2"><b>가정용</b></td><td>V7-S</td><td>3~4인 가구 / 스탠딩형</td><td>탈취필터 적용</td></tr>
+        <tr><td>V7-B</td><td>가정용 빌트인</td><td>싱크대 하부 일체화</td></tr>
+        <tr><td rowspan="6"><b>업소용 (NK)</b></td><td>NK-05K</td><td>5kg/회 · 소규모 음식점·편의점</td><td>-</td></tr>
+        <tr><td>NK-15K</td><td>15kg/회 · 일반 음식점·카페</td><td>-</td></tr>
+        <tr><td>NK-30K</td><td>30kg/회 · 중형 음식점·소형 급식</td><td>-</td></tr>
+        <tr><td>NK-50K</td><td>50kg/회 · 대형 음식점·구내식당</td><td>-</td></tr>
+        <tr><td>NK-99K</td><td>99kg/회 · 단체 급식·호텔</td><td>-</td></tr>
+        <tr><td>NK-1.0ton</td><td>1,000kg/회 · 공장·대형시설</td><td>대형 라인업</td></tr>
+        <tr><td rowspan="4"><b>수거함</b></td><td>C120D</td><td>120L · 공동주택·상가</td><td>표준 리프팅</td></tr>
+        <tr><td>C240D</td><td>240L · 다세대·소형 상가</td><td>이동 휠</td></tr>
+        <tr><td>C700F</td><td>700L · 아파트·대형 상가</td><td>전면 리프팅</td></tr>
+        <tr><td>D1100F</td><td>1,100L · 대단지·산업시설</td><td>전면 리프팅</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px; font-size:12px; color:var(--ink-soft);">
+      ※ 수치는 일반적 사양을 참고한 데모값. <span class="pill warn">[확인 필요]</span> 표기 항목은 운영 전 제조사 검증 필수.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span> TANNHOF 수입 가구 (NOVECO 단독 수입)</h2>
+    <div class="card" style="margin-bottom:14px;">
+      <div style="display:flex; gap:14px; flex-wrap:wrap; align-items:baseline;">
+        <b style="font-size:18px;">TANNHOF · 탄호프</b>
+        <span class="pill dark">Germany · Schwarzwald</span>
+        <span class="pill">1958년 창업 · 3대째 가족 공방</span>
+      </div>
+      <p style="margin:10px 0 0; color:var(--ink-soft);">
+        독일 남부 흑림(Schwarzwald)의 가족 공방. 솔리드 우드, 정통 짜맞춤,
+        천연 오일 마감의 오래 쓰는 가구. <b>NOVECO가 국내 단독 수입·전시·AS</b>를 담당하며,
+        주문 후 8 ~ 12주 (현지 제작 + 운송).
+      </p>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>컬렉션</th><th>용도</th><th>핵심 소재</th><th>대표 모델</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>LICHTLINIE</b><br/><span style="font-size:12px;color:var(--ink-soft);">리히트리니에</span></td>
+          <td>거실 · 라운지</td>
+          <td>화이트 오크 솔리드 + 울/린넨</td>
+          <td>Sofa 02 · Sessel 01 · Couchtisch</td>
+        </tr>
+        <tr>
+          <td><b>TAFELWERK</b><br/><span style="font-size:12px;color:var(--ink-soft);">타펠베르크</span></td>
+          <td>다이닝 · 워크</td>
+          <td>블랙월넛 솔리드 + 황동</td>
+          <td>Esstisch 220 · Stuhl 03</td>
+        </tr>
+        <tr>
+          <td><b>DUNKELRAUM</b><br/><span style="font-size:12px;color:var(--ink-soft);">둔켈라움</span></td>
+          <td>수납 · 진열</td>
+          <td>애쉬 솔리드 + 매트 블랙 라커</td>
+          <td>Sideboard L · Regal Hoch</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2><span class="num">06</span> 자체 점검 현황 (READY / TODO)</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="margin:0 0 10px; font-size:14px;">SEO · 접근성 <span class="pill">대부분 완료</span></h3>
+        <ul class="clean">
+          <li>html lang="ko" · metadataBase · OG 기본값</li>
+          <li>generateMetadata 동적 적용</li>
+          <li>시맨틱 헤딩 계층 / 스킵 링크</li>
+          <li>모바일 메뉴 aria 속성 / ESC 닫기</li>
+          <li>폼 label 연결 · aria-required · aria-live</li>
+          <li>WCAG AA 색 대비 통과</li>
+          <li class="todo">sitemap.xml / robots.txt (운영 전)</li>
+          <li class="todo">OG 이미지 1200×630</li>
+          <li class="todo">실제 이미지 alt 작성</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 10px; font-size:14px;">반응형 · 유지보수성 <span class="pill">완료</span></h3>
+        <ul class="clean">
+          <li>모바일 우선 (sm 768 미만 기본)</li>
+          <li>햄버거 메뉴 · 그리드 1→2→3 점진 확장</li>
+          <li>스펙 테이블 가로 스크롤</li>
+          <li>data / components 분리</li>
+          <li>UI 프리미티브 5종 (Button · Container · Section · ProductCard · SpecTable)</li>
+          <li>카테고리 추가는 data만 확장 → 자동 라우팅</li>
+          <li>Tailwind brand 색 단일 출처 관리</li>
+          <li class="todo">eslint / prettier / 단위 테스트 도입</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">07</span> 오픈 전 잔여 작업 · 리스크</h2>
+    <div class="card">
+      <div class="risk-row" style="font-weight:700; color:var(--ink-soft); font-size:12px;">
+        <div>우선순위</div><div>항목</div><div>액션</div>
+      </div>
+      <div class="risk-row">
+        <div class="lvl lvl-high">HIGH</div>
+        <div>제품 스펙 [확인 필요] 다수</div>
+        <div>제조사 정식 사양 확정 → <code>data/products.ts</code> 일괄 갱신</div>
+      </div>
+      <div class="risk-row">
+        <div class="lvl lvl-high">HIGH</div>
+        <div>회사 실데이터 미입력 (전화·이메일·주소)</div>
+        <div><code>data/company.ts</code> placeholder 교체 또는 환경변수 주입</div>
+      </div>
+      <div class="risk-row">
+        <div class="lvl lvl-high">HIGH</div>
+        <div>문의 폼이 콘솔 출력만 (실제 발송 X)</div>
+        <div><code>app/api/contact/route.ts</code> 또는 Formspree/Tally 연결</div>
+      </div>
+      <div class="risk-row">
+        <div class="lvl lvl-mid">MID</div>
+        <div>이미지 자산이 그라디언트 자리표시자</div>
+        <div>실제 제품·가구 사진 입고 → <code>next/image</code> 교체</div>
+      </div>
+      <div class="risk-row">
+        <div class="lvl lvl-mid">MID</div>
+        <div>인증·설치사례 더미</div>
+        <div>실 인증서·설치현장 콘텐츠 확보 (CMS 연동 권장)</div>
+      </div>
+      <div class="risk-row">
+        <div class="lvl lvl-low">LOW</div>
+        <div>sitemap / robots / lint / 테스트</div>
+        <div>오픈 직전 일괄 추가</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">08</span> 회의 안건 (제안)</h2>
+    <div class="agenda">
+      <ol>
+        <li><b>제품 스펙 확정 책임자</b> — 12개 모델 [확인 필요] 항목 채울 담당과 데드라인</li>
+        <li><b>회사 정보 공식 카피</b> — 사명·연락처·주소·고객센터 운영시간</li>
+        <li><b>TANNHOF 운영 정책</b> — 가격 공개 여부 / 쇼룸 위치 / 리드타임 명시 범위</li>
+        <li><b>문의 접수 채널</b> — 자체 API 운영 vs 외부 폼 서비스 (운영 부담)</li>
+        <li><b>이미지 자산</b> — 제품 사진 촬영 일정, 가구 컷 수급 경로</li>
+        <li><b>도메인 / 호스팅</b> — 운영 도메인 결정, Vercel·자체 서버 등 배포 환경</li>
+        <li><b>오픈 일정</b> — 위 잔여 작업을 역산한 D-Day 합의</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer class="foot">
+    NOVECO 웹사이트 프로젝트 브리핑 · 내부 회의용 · 생성일 2026-04-28
+  </footer>
+
+</div>
+</body>
+</html>

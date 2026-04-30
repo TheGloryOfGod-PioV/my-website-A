@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#047857" />
+  <title>에코스타 ECOSTA | 주방과 사업장을 더 깨끗하게 만드는 음식물처리 솔루션</title>
+  <meta name="description" content="가정용부터 업소용까지, 공간과 배출량에 맞는 음식물처리 시스템을 제안하는 친환경 기술 기업입니다." />
+  <meta name="robots" content="index, follow" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:title" content="에코스타 ECOSTA" />
+  <meta property="og:description" content="주방과 사업장을 더 깨끗하게 만드는 음식물처리 솔루션" />
+
+  <!-- Pretendard -->
+  <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
+
+  <!-- Tailwind via CDN (외부팀 검토용 / 실제 운영은 React 버전) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#047857',
+              dark: '#064E3B',
+              light: '#10B981',
+              accent: '#84CC16',
+            },
+          },
+          fontFamily: {
+            sans: ['"Pretendard Variable"', 'Pretendard', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+          maxWidth: {
+            content: '1200px',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; }
+    *:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #047857; border-radius: 4px; }
+    .text-balance { text-wrap: balance; }
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-white text-gray-900 antialiased">
+
+  <!-- Skip link -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-brand focus:text-white focus:px-3 focus:py-2 focus:rounded">본문 바로가기</a>
+
+  <!-- ===== Header ===== -->
+  <header class="sticky top-0 z-30 border-b border-gray-200 bg-white/95 backdrop-blur">
+    <div class="mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8 flex h-16 items-center justify-between gap-4">
+      <a href="#" class="flex items-center gap-2" aria-label="에코스타 홈으로">
+        <span aria-hidden="true" class="grid h-8 w-8 place-items-center rounded-md bg-brand font-bold text-white">E</span>
+        <span class="text-lg font-bold tracking-tight text-gray-900">
+          ECOSTA <span class="ml-1 text-sm font-medium text-gray-500">에코스타</span>
+        </span>
+      </a>
+
+      <nav aria-label="주 메뉴" class="hidden lg:block">
+        <ul class="flex items-center gap-1">
+          <li><a href="#about" class="inline-block px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand">회사소개</a></li>
+          <li><a href="#categories" class="inline-block px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand">가정용</a></li>
+          <li><a href="#categories" class="inline-block px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand">업소용</a></li>
+          <li><a href="#categories" class="inline-block px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand">수거함</a></li>
+          <li><a href="#cases" class="inline-block px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand">인증·설치사례</a></li>
+          <li><a href="#support" class="inline-block px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand">고객센터</a></li>
+        </ul>
+      </nav>
+
+      <div class="hidden lg:block">
+        <a href="#contact" class="inline-flex items-center justify-center rounded-md bg-brand text-white font-medium px-4 py-2 text-sm transition-colors hover:bg-brand-dark">문의하기</a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button id="menu-btn" type="button"
+        class="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 lg:hidden"
+        aria-expanded="false" aria-controls="mobile-nav" aria-label="메뉴 열기">
+        <svg id="menu-icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 7h16" stroke-linecap="round" /><path d="M4 12h16" stroke-linecap="round" /><path d="M4 17h16" stroke-linecap="round" />
+        </svg>
+        <svg id="menu-icon-close" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile nav panel -->
+    <div id="mobile-nav" role="dialog" aria-modal="true" aria-label="주 메뉴"
+      class="hidden fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto bg-white lg:hidden">
+      <nav class="px-5 pb-10 pt-4">
+        <ul class="divide-y divide-gray-100">
+          <li class="py-2"><a href="#about" class="block py-2 text-base font-semibold text-gray-900 hover:text-brand">회사소개</a></li>
+          <li class="py-2"><a href="#categories" class="block py-2 text-base font-semibold text-gray-900 hover:text-brand">가정용</a></li>
+          <li class="py-2"><a href="#categories" class="block py-2 text-base font-semibold text-gray-900 hover:text-brand">업소용</a></li>
+          <li class="py-2"><a href="#categories" class="block py-2 text-base font-semibold text-gray-900 hover:text-brand">수거함</a></li>
+          <li class="py-2"><a href="#cases" class="block py-2 text-base font-semibold text-gray-900 hover:text-brand">인증·설치사례</a></li>
+          <li class="py-2"><a href="#support" class="block py-2 text-base font-semibold text-gray-900 hover:text-brand">고객센터</a></li>
+        </ul>
+        <div class="mt-6">
+          <a href="#contact" class="inline-flex items-center justify-center w-full rounded-md bg-brand text-white font-medium px-6 py-3 text-base">문의하기</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="flex-1">
+
+    <!-- ===== Hero ===== -->
+    <section aria-labelledby="hero-title" class="relative overflow-hidden bg-gradient-to-b from-emerald-50/50 to-white">
+      <div class="mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8 grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-2 lg:py-28">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-widest text-brand">ECOSTA · 음식물처리 솔루션</p>
+          <h1 id="hero-title" class="mt-3 text-4xl font-bold leading-tight tracking-tight text-gray-900 sm:text-5xl lg:text-6xl text-balance">
+            주방과 사업장을 더 깨끗하게,<br />
+            <span class="text-brand">음식물처리 시스템</span>
+          </h1>
+          <p class="mt-5 max-w-xl text-base leading-relaxed text-gray-600 sm:text-lg">
+            가정용부터 업소용까지, 공간과 배출량에 맞는 음식물처리 시스템을 제안합니다.
+            위생·내구성·AS까지 한 번에 검토하세요.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#contact" class="inline-flex items-center justify-center rounded-md bg-brand text-white font-medium px-6 py-3 text-base hover:bg-brand-dark">제품 상담하기</a>
+            <a href="#categories" class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white text-gray-900 font-medium px-6 py-3 text-base hover:border-brand hover:text-brand">제품군 보기</a>
+          </div>
+          <dl class="mt-10 grid grid-cols-3 gap-6 border-t border-gray-200 pt-6 text-sm">
+            <div><dt class="text-gray-500">제품 라인업</dt><dd class="mt-1 text-2xl font-bold text-gray-900">12+</dd></div>
+            <div><dt class="text-gray-500">대응 용량</dt><dd class="mt-1 text-2xl font-bold text-gray-900">5kg ~ 1ton</dd></div>
+            <div><dt class="text-gray-500">AS 네트워크</dt><dd class="mt-1 text-2xl font-bold text-gray-900">전국</dd></div>
+          </dl>
+        </div>
+        <div aria-hidden="true" class="relative aspect-[5/4] w-full overflow-hidden rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-100 via-emerald-50 to-white">
+          <div class="absolute inset-0 grid place-items-center text-center">
+            <div>
+              <div class="mx-auto grid h-24 w-24 place-items-center rounded-2xl bg-brand text-3xl font-bold text-white shadow-sm">E</div>
+              <p class="mt-4 text-sm font-medium text-emerald-800/70">[메인 키비주얼 자리표시자]</p>
+            </div>
+          </div>
+          <div class="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-lime-300/30 blur-2xl"></div>
+          <div class="absolute -bottom-12 -left-12 h-48 w-48 rounded-full bg-emerald-400/20 blur-2xl"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Product Categories ===== -->
+    <section id="categories" aria-labelledby="cat-title" class="py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8">
+        <header class="mb-10 lg:mb-14">
+          <p class="text-sm font-semibold uppercase tracking-widest text-brand">Products</p>
+          <h2 id="cat-title" class="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 text-balance">공간과 규모에 맞는 제품군을 선택하세요</h2>
+          <p class="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed">가정용은 컴팩트한 위생 관리, 업소용은 안정적 처리 용량, 수거함은 표준 규격 호환에 초점을 맞췄습니다.</p>
+        </header>
+        <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <li>
+            <a href="#featured" class="group block h-full rounded-lg border border-gray-200 bg-white p-6 transition-colors hover:border-brand">
+              <div class="mb-5 grid h-32 place-items-center rounded-md bg-gradient-to-br from-emerald-100 to-emerald-50" aria-hidden="true">
+                <span class="font-mono text-sm font-semibold text-emerald-800/60">HOME</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900">가정용 음식물처리기</h3>
+              <p class="mt-2 text-sm leading-relaxed text-gray-600">주방에 두는 컴팩트한 위생 솔루션</p>
+              <span class="mt-4 inline-block text-sm font-medium text-brand group-hover:underline">라인업 보기 →</span>
+            </a>
+          </li>
+          <li>
+            <a href="#featured" class="group block h-full rounded-lg border border-gray-200 bg-white p-6 transition-colors hover:border-brand">
+              <div class="mb-5 grid h-32 place-items-center rounded-md bg-gradient-to-br from-sky-100 to-sky-50" aria-hidden="true">
+                <span class="font-mono text-sm font-semibold text-emerald-800/60">COMMERCIAL</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900">업소용 음식물처리기</h3>
+              <p class="mt-2 text-sm leading-relaxed text-gray-600">음식점·급식·호텔 등 다양한 처리 용량 라인업</p>
+              <span class="mt-4 inline-block text-sm font-medium text-brand group-hover:underline">라인업 보기 →</span>
+            </a>
+          </li>
+          <li>
+            <a href="#featured" class="group block h-full rounded-lg border border-gray-200 bg-white p-6 transition-colors hover:border-brand">
+              <div class="mb-5 grid h-32 place-items-center rounded-md bg-gradient-to-br from-lime-100 to-lime-50" aria-hidden="true">
+                <span class="font-mono text-sm font-semibold text-emerald-800/60">CONTAINERS</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900">수거함 / 컨테이너</h3>
+              <p class="mt-2 text-sm leading-relaxed text-gray-600">공동주택·상업시설 표준 수거 시스템 대응</p>
+              <span class="mt-4 inline-block text-sm font-medium text-brand group-hover:underline">라인업 보기 →</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Why ECOSTA ===== -->
+    <section id="about" aria-labelledby="why-title" class="py-16 sm:py-20 lg:py-24 bg-gray-50">
+      <div class="mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8">
+        <header class="mb-10 lg:mb-14">
+          <p class="text-sm font-semibold uppercase tracking-widest text-brand">Why ECOSTA</p>
+          <h2 id="why-title" class="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 text-balance">제조업의 신뢰감, 운영의 편의성을 함께</h2>
+          <p class="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed">현장 운영자가 가장 자주 묻는 위생, 용량, AS, 친환경 네 가지 기준에 맞춰 라인업을 구성했습니다.</p>
+        </header>
+        <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <li class="rounded-lg border border-gray-200 bg-white p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-md bg-emerald-50">
+              <svg class="h-5 w-5 text-brand" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 10l4 4 8-8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <h3 class="mt-4 text-lg font-bold text-gray-900">위생적인 주방 환경</h3>
+            <p class="mt-2 text-sm leading-relaxed text-gray-600">악취·해충 발생 원인을 줄이고, 매장 운영과 가정 주방의 청결도를 높입니다.</p>
+          </li>
+          <li class="rounded-lg border border-gray-200 bg-white p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-md bg-emerald-50">
+              <svg class="h-5 w-5 text-brand" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 10l4 4 8-8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <h3 class="mt-4 text-lg font-bold text-gray-900">다양한 용량 라인업</h3>
+            <p class="mt-2 text-sm leading-relaxed text-gray-600">5kg/회 소형부터 1ton/회 대형까지, 사업장 규모와 배출 패턴에 맞춰 선택할 수 있습니다.</p>
+          </li>
+          <li class="rounded-lg border border-gray-200 bg-white p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-md bg-emerald-50">
+              <svg class="h-5 w-5 text-brand" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 10l4 4 8-8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <h3 class="mt-4 text-lg font-bold text-gray-900">설치 및 AS 지원</h3>
+            <p class="mt-2 text-sm leading-relaxed text-gray-600">전국 단위 설치·점검·소모품 교체 운영. 가동 중단 없이 빠르게 응대합니다.</p>
+          </li>
+          <li class="rounded-lg border border-gray-200 bg-white p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-md bg-emerald-50">
+              <svg class="h-5 w-5 text-brand" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 10l4 4 8-8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <h3 class="mt-4 text-lg font-bold text-gray-900">친환경 처리 방식</h3>
+            <p class="mt-2 text-sm leading-relaxed text-gray-600">건조·분쇄·발효 등 모델별 처리 방식을 적용해 폐기물량과 환경 영향을 줄입니다.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Featured Products ===== -->
+    <section id="featured" aria-labelledby="featured-title" class="py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8">
+        <header class="mb-10 lg:mb-14">
+          <p class="text-sm font-semibold uppercase tracking-widest text-brand">Featured Models</p>
+          <h2 id="featured-title" class="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 text-balance">대표 모델 빠르게 살펴보기</h2>
+          <p class="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed">가정용·업소용·수거함 카테고리에서 가장 자주 도입되는 대표 모델 3종을 모았습니다.</p>
+        </header>
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+          <li>
+            <article class="group relative flex flex-col h-full rounded-lg border border-gray-200 bg-white transition-colors hover:border-brand">
+              <div aria-hidden="true" class="relative aspect-[4/3] w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-emerald-50 to-emerald-100">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="font-mono text-2xl font-bold text-emerald-700/40">V7-S</span>
+                </div>
+                <span class="absolute left-4 top-4 inline-block rounded-full bg-white/90 px-2.5 py-0.5 text-xs font-medium text-brand">가정용 음식물처리기</span>
+              </div>
+              <div class="flex flex-1 flex-col p-5 sm:p-6">
+                <h3 class="text-lg font-bold text-gray-900">V7-S</h3>
+                <p class="mt-1 text-sm text-gray-600">스탠딩형 가정용 처리기</p>
+                <p class="mt-3 text-sm leading-relaxed text-gray-700 line-clamp-3">주방 한쪽에 세워두는 스탠딩 디자인의 가정용 음식물처리기. 가족 단위 사용에 적합한 표준 용량.</p>
+                <ul class="mt-4 space-y-1.5 text-sm text-gray-700">
+                  <li class="flex justify-between gap-3"><span class="text-gray-500">용도</span><span class="font-medium">가정용 (3~4인)</span></li>
+                  <li class="flex justify-between gap-3"><span class="text-gray-500">처리 방식</span><span class="font-medium">건조·분쇄 [확인 필요]</span></li>
+                  <li class="flex justify-between gap-3"><span class="text-gray-500">설치 위치</span><span class="font-medium">주방 내 스탠딩</span></li>
+                </ul>
+                <span class="mt-5 text-sm font-medium text-brand">제품 자세히 보기 →</span>
+              </div>
+            </article>
+          </li>
+
+          <li>
+            <article class="group relative flex flex-col h-full rounded-lg border border-gray-200 bg-white transition-colors hover:border-brand">
+              <div aria-hidden="true" class="relative aspect-[4/3] w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-emerald-50 to-emerald-100">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="font-mono text-2xl font-bold text-emerald-700/40">NK-05K</span>
+                </div>
+                <span class="absolute left-4 top-4 inline-block rounded-full bg-white/90 px-2.5 py-0.5 text-xs font-medium text-brand">업소용 음식물처리기</span>
+              </div>
+              <div class="flex flex-1 flex-col p-5 sm:p-6">
+                <h3 class="text-lg font-bold text-gray-900">NK-05K</h3>
+                <p class="mt-1 text-sm text-gray-600">소규모 음식점·편의점·펜션 대상</p>
+                <p class="mt-3 text-sm leading-relaxed text-gray-700 line-clamp-3">소규모 음식점·편의점·펜션 환경에서 발생하는 음식물쓰레기를 안정적으로 처리하는 모델입니다.</p>
+                <ul class="mt-4 space-y-1.5 text-sm text-gray-700">
+                  <li class="flex justify-between gap-3"><span class="text-gray-500">용도</span><span class="font-medium">업소용 소형</span></li>
+                  <li class="flex justify-between gap-3"><span class="text-gray-500">처리 용량</span><span class="font-medium">5kg/회 [확인 필요]</span></li>
+                  <li class="flex justify-between gap-3"><span class="text-gray-500">설치 위치</span><span class="font-medium">주방·뒤뜰</span></li>
+                </ul>
+                <span class="mt-5 text-sm font-medium text-brand">제품 자세히 보기 →</span>
+              </div>
+            </article>
+          </li>
+
+          <li>
+            <article class="group relative flex flex-col h-full rounded-lg border border-gray-200 bg-white transition-colors hover:border-brand">
+              <div aria-hidden="true" class="relative aspect-[4/3] w-full overflow-hidden rounded-t-lg bg-gradient-to-br from-emerald-50 to-emerald-100">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="font-mono text-2xl font-bold text-emerald-700/40">C120D</span>
+                </div>
+                <span class="absolute left-4 top-4 inline-block rounded-full bg-white/90 px-2.5 py-0.5 text-xs font-medium text-brand">수거함 / 컨테이너</span>
+              </div>
+              <div class="flex flex-1 flex-col p-5 sm:p-6">
+                <h3 class="text-lg font-bold text-gray-900">C120D</h3>
+                <p class="mt-1 text-sm text-gray-600">표준 120L 수거함</p>
+                <p class="mt-3 text-sm leading-relaxed text-gray-700 line-clamp-3">일반 수거 차량 리프팅 시스템에 호환되는 120L 표준 수거함입니다.</p>
+                <ul class="mt-4 space-y-1.5 text-sm text-gray-700">
+                  <li class="flex justify-between gap-3"><span class="text-gray-500">용량</span><span class="font-medium">120L</span></li>
+                  <li class="flex justify-between gap-3"><span class="text-gray-500">재질</span><span class="font-medium">HDPE [확인 필요]</span></li>
+                  <li class="flex justify-between gap-3"><span class="text-gray-500">리프팅</span><span class="font-medium">표준 호환</span></li>
+                </ul>
+                <span class="mt-5 text-sm font-medium text-brand">제품 자세히 보기 →</span>
+              </div>
+            </article>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Spec Preview ===== -->
+    <section id="spec" aria-labelledby="spec-title" class="py-16 sm:py-20 lg:py-24 bg-gray-50">
+      <div class="mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8">
+        <header class="mb-10 lg:mb-14">
+          <p class="text-sm font-semibold uppercase tracking-widest text-brand">Spec Preview</p>
+          <h2 id="spec-title" class="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 text-balance">대표 모델 스펙 미리보기</h2>
+          <p class="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed">자세한 사양은 각 모델 상세에서 확인하세요. 일부 수치는 [확인 필요]로 표기되어 있습니다.</p>
+        </header>
+
+        <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white">
+          <table class="w-full min-w-[720px] text-left text-sm">
+            <caption class="sr-only">대표 모델 스펙 비교표</caption>
+            <thead class="border-b border-gray-200 bg-gray-50">
+              <tr>
+                <th scope="col" class="px-4 py-3 font-semibold text-gray-700">모델</th>
+                <th scope="col" class="px-4 py-3 font-semibold text-gray-700">카테고리</th>
+                <th scope="col" class="px-4 py-3 font-semibold text-gray-700">용도</th>
+                <th scope="col" class="px-4 py-3 font-semibold text-gray-700">처리 방식</th>
+                <th scope="col" class="px-4 py-3 font-semibold text-gray-700">처리 용량</th>
+                <th scope="col" class="px-4 py-3 font-semibold text-gray-700">설치 위치</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-gray-900">V7-S</th>
+                <td class="px-4 py-3 text-gray-600">가정용</td>
+                <td class="px-4 py-3 text-gray-700">3~4인 가정</td>
+                <td class="px-4 py-3 text-gray-700">건조·분쇄 [확인 필요]</td>
+                <td class="px-4 py-3 text-gray-700">[확인 필요]</td>
+                <td class="px-4 py-3 text-gray-700">주방 내 스탠딩</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-gray-900">NK-05K</th>
+                <td class="px-4 py-3 text-gray-600">업소용</td>
+                <td class="px-4 py-3 text-gray-700">소규모 음식점·편의점</td>
+                <td class="px-4 py-3 text-gray-700">건조·분쇄·발효 [확인 필요]</td>
+                <td class="px-4 py-3 text-gray-700">5kg/회 [확인 필요]</td>
+                <td class="px-4 py-3 text-gray-700">주방·뒤뜰</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-gray-900">C120D</th>
+                <td class="px-4 py-3 text-gray-600">수거함</td>
+                <td class="px-4 py-3 text-gray-700">공동주택·상가</td>
+                <td class="px-4 py-3 text-gray-700">—</td>
+                <td class="px-4 py-3 text-gray-700">120L</td>
+                <td class="px-4 py-3 text-gray-700">옥외 수거 동선</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Installation / Cases ===== -->
+    <section id="cases" aria-labelledby="cases-title" class="py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8">
+        <header class="mb-10 lg:mb-14">
+          <p class="text-sm font-semibold uppercase tracking-widest text-brand">Installation & Trust</p>
+          <h2 id="cases-title" class="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 text-balance">현장에서 검증된 운영 사례</h2>
+          <p class="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed">공동주택, 음식점, 산업시설 등 다양한 현장에 설치·운영된 사례와 인증 현황을 소개합니다.</p>
+        </header>
+
+        <ul class="mb-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <li class="rounded-lg border border-gray-200 bg-white p-5 text-center"><p class="text-2xl font-bold text-brand">[확인 필요]</p><p class="mt-1 text-sm text-gray-600">전국 설치 현장</p></li>
+          <li class="rounded-lg border border-gray-200 bg-white p-5 text-center"><p class="text-2xl font-bold text-brand">[확인 필요]</p><p class="mt-1 text-sm text-gray-600">운영 연수</p></li>
+          <li class="rounded-lg border border-gray-200 bg-white p-5 text-center"><p class="text-2xl font-bold text-brand">[확인 필요]</p><p class="mt-1 text-sm text-gray-600">AS 거점</p></li>
+          <li class="rounded-lg border border-gray-200 bg-white p-5 text-center"><p class="text-2xl font-bold text-brand">[확인 필요]</p><p class="mt-1 text-sm text-gray-600">공인 인증</p></li>
+        </ul>
+
+        <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <li class="flex flex-col rounded-lg border border-gray-200 bg-white p-6">
+            <div class="flex items-center justify-between text-xs">
+              <span class="rounded-full bg-emerald-50 px-2.5 py-0.5 font-medium text-brand">설치사례</span>
+              <time datetime="2024-09" class="text-gray-500">2024-09</time>
+            </div>
+            <h3 class="mt-4 text-base font-semibold text-gray-900">[설치 현장명 확인 필요] 단지 음식물 자원화 시스템 설치</h3>
+            <p class="mt-2 text-sm leading-relaxed text-gray-600">공동주택 단지에 업소용 처리기와 700L 컨테이너를 연계 설치하여 수거 효율을 개선한 사례.</p>
+          </li>
+          <li class="flex flex-col rounded-lg border border-gray-200 bg-white p-6">
+            <div class="flex items-center justify-between text-xs">
+              <span class="rounded-full bg-emerald-50 px-2.5 py-0.5 font-medium text-brand">인증</span>
+              <time datetime="2023-11" class="text-gray-500">2023-11</time>
+            </div>
+            <h3 class="mt-4 text-base font-semibold text-gray-900">환경 관련 인증 (KC / 환경표지 등) [확인 필요]</h3>
+            <p class="mt-2 text-sm leading-relaxed text-gray-600">주요 모델에 대한 공인 인증 확보. 실제 인증 번호와 범위는 운영 자료 참고.</p>
+          </li>
+          <li class="flex flex-col rounded-lg border border-gray-200 bg-white p-6">
+            <div class="flex items-center justify-between text-xs">
+              <span class="rounded-full bg-emerald-50 px-2.5 py-0.5 font-medium text-brand">언론보도</span>
+              <time datetime="2024-02" class="text-gray-500">2024-02</time>
+            </div>
+            <h3 class="mt-4 text-base font-semibold text-gray-900">주요 매체 보도자료 [확인 필요]</h3>
+            <p class="mt-2 text-sm leading-relaxed text-gray-600">음식물 자원화·탄소 저감 흐름 속 업계 인터뷰 및 보도.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Support / FAQ (snippet) ===== -->
+    <section id="support" aria-labelledby="support-title" class="py-16 sm:py-20 lg:py-24 bg-gray-50">
+      <div class="mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8">
+        <header class="mb-10 lg:mb-14">
+          <p class="text-sm font-semibold uppercase tracking-widest text-brand">Support · FAQ</p>
+          <h2 id="support-title" class="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 text-balance">자주 묻는 질문</h2>
+        </header>
+        <ul class="space-y-3">
+          <li>
+            <details class="group rounded-lg border border-gray-200 bg-white p-5 open:border-brand">
+              <summary class="cursor-pointer list-none text-base font-semibold text-gray-900"><span class="mr-2 text-brand">Q.</span>AS 신청은 어떻게 하나요?</summary>
+              <p class="mt-3 text-sm leading-relaxed text-gray-600"><span class="mr-2 font-semibold text-gray-500">A.</span>고객센터 전화 또는 문의 폼으로 모델명·설치 위치·증상을 알려주시면 가까운 거점에서 응대합니다.</p>
+            </details>
+          </li>
+          <li>
+            <details class="group rounded-lg border border-gray-200 bg-white p-5 open:border-brand">
+              <summary class="cursor-pointer list-none text-base font-semibold text-gray-900"><span class="mr-2 text-brand">Q.</span>설치 환경 사전 점검은 필수인가요?</summary>
+              <p class="mt-3 text-sm leading-relaxed text-gray-600"><span class="mr-2 font-semibold text-gray-500">A.</span>업소용·시설용은 전원·배수·동선 점검이 필요해 사전 방문을 권장합니다. 가정용은 배송 후 자가 설치 또는 방문 설치 중 선택 가능.</p>
+            </details>
+          </li>
+          <li>
+            <details class="group rounded-lg border border-gray-200 bg-white p-5 open:border-brand">
+              <summary class="cursor-pointer list-none text-base font-semibold text-gray-900"><span class="mr-2 text-brand">Q.</span>소모품도 별도로 구매할 수 있나요?</summary>
+              <p class="mt-3 text-sm leading-relaxed text-gray-600"><span class="mr-2 font-semibold text-gray-500">A.</span>모델별로 권장 교체 주기와 함께 안내드립니다. 정기 점검에 포함되거나 단품 구매가 가능합니다. [상세 정책 확인 필요]</p>
+            </details>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Contact CTA + Form ===== -->
+    <section id="contact" aria-labelledby="cta-title" class="bg-brand text-white">
+      <div class="mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8 grid items-center gap-8 py-16 sm:py-20 lg:grid-cols-3">
+        <div class="lg:col-span-2">
+          <p class="text-sm font-semibold uppercase tracking-widest text-emerald-200">Contact</p>
+          <h2 id="cta-title" class="mt-3 text-3xl font-bold leading-tight sm:text-4xl text-balance">공간과 배출량에 맞는 제품을 추천받아보세요</h2>
+          <p class="mt-4 max-w-2xl text-base leading-relaxed text-emerald-50">가정용·업소용·시설용 라인업 중 현장에 가장 적합한 모델을 안내해드립니다. 도면이나 운영 환경 정보가 있다면 함께 보내주세요.</p>
+        </div>
+        <div class="flex flex-col gap-3 lg:items-end">
+          <a href="#inquiry" class="inline-flex items-center justify-center rounded-md bg-white text-brand font-medium px-6 py-3 text-base hover:bg-gray-100">문의 폼으로</a>
+          <p class="text-sm text-emerald-100">고객센터 [고객센터 번호 확인 필요]</p>
+          <p class="text-xs text-emerald-200">운영시간 · 평일 09:00 - 18:00</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="inquiry" aria-labelledby="form-title" class="py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-3">
+        <aside class="lg:col-span-1">
+          <p class="text-sm font-semibold uppercase tracking-widest text-brand">Inquiry</p>
+          <h2 id="form-title" class="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl text-balance">상담·도입 문의</h2>
+          <p class="mt-3 text-base text-gray-600">현장 환경에 맞는 모델을 추천드립니다. 일일 배출량, 설치 위치, 도입 일정 등을 남겨주세요.</p>
+          <div class="mt-8 rounded-lg border border-gray-200 bg-gray-50 p-5 text-sm text-gray-700">
+            <p class="font-semibold text-gray-900">함께 보내주세요</p>
+            <ul class="mt-3 space-y-1.5">
+              <li>· 일일 음식물 배출량 (kg)</li>
+              <li>· 설치 희망 위치 / 면적</li>
+              <li>· 전원 / 배수 환경</li>
+              <li>· 도입 희망 일정</li>
+            </ul>
+          </div>
+        </aside>
+
+        <form id="inquiry-form" class="lg:col-span-2 space-y-5 rounded-lg border border-gray-200 bg-white p-6 sm:p-8" novalidate aria-describedby="form-status">
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="f-name" class="block text-sm font-medium text-gray-900">이름 <span aria-hidden="true" class="text-red-500">*</span></label>
+              <input id="f-name" name="name" type="text" required aria-required="true"
+                class="mt-1.5 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30" />
+            </div>
+            <div>
+              <label for="f-company" class="block text-sm font-medium text-gray-900">회사명 / 단체명</label>
+              <input id="f-company" name="company" type="text"
+                class="mt-1.5 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30" />
+            </div>
+            <div>
+              <label for="f-email" class="block text-sm font-medium text-gray-900">이메일 <span aria-hidden="true" class="text-red-500">*</span></label>
+              <input id="f-email" name="email" type="email" required aria-required="true"
+                class="mt-1.5 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30" />
+            </div>
+            <div>
+              <label for="f-phone" class="block text-sm font-medium text-gray-900">연락처 <span aria-hidden="true" class="text-red-500">*</span></label>
+              <input id="f-phone" name="phone" type="tel" required aria-required="true" placeholder="010-0000-0000"
+                class="mt-1.5 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30" />
+            </div>
+          </div>
+
+          <div>
+            <label for="f-product" class="block text-sm font-medium text-gray-900">관심 제품군</label>
+            <select id="f-product" name="product" required
+              class="mt-1.5 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30">
+              <option value="" disabled selected>관심 제품군 선택</option>
+              <option value="home">가정용 음식물처리기</option>
+              <option value="commercial">업소용 음식물처리기</option>
+              <option value="containers">수거함 / 컨테이너</option>
+              <option value="etc">기타 / 설치 상담</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="f-message" class="block text-sm font-medium text-gray-900">문의 내용 <span aria-hidden="true" class="text-red-500">*</span></label>
+            <textarea id="f-message" name="message" rows="5" required
+              class="mt-1.5 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30"
+              placeholder="현장 환경, 일일 배출량, 설치 일정 등을 알려주시면 더 정확한 상담이 가능합니다."></textarea>
+          </div>
+
+          <div class="flex items-start gap-2">
+            <input id="f-agree" name="agree" type="checkbox" required class="mt-1 h-4 w-4 rounded border-gray-300 text-brand focus:ring-brand" />
+            <label for="f-agree" class="text-sm text-gray-700">개인정보 수집·이용에 동의합니다. <span aria-hidden="true" class="text-red-500">*</span></label>
+          </div>
+
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p id="form-status" aria-live="polite" class="text-sm text-gray-500">보내주신 정보는 상담 목적으로만 사용됩니다.</p>
+            <button type="submit" class="inline-flex items-center justify-center rounded-md bg-brand text-white font-medium px-6 py-3 text-base hover:bg-brand-dark">문의 보내기</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="mt-16 border-t border-gray-200 bg-gray-50">
+    <div class="mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <p class="text-lg font-bold text-gray-900">ECOSTA <span class="ml-1 text-sm font-medium text-gray-500">에코스타</span></p>
+          <p class="mt-3 text-sm leading-relaxed text-gray-600">가정용부터 업소용까지, 공간과 배출량에 맞는 음식물처리 시스템을 제안하는 친환경 기술 기업입니다.</p>
+          <dl class="mt-5 space-y-1.5 text-sm text-gray-600">
+            <div class="flex gap-2"><dt class="text-gray-500">고객센터</dt><dd>[고객센터 번호 확인 필요]</dd></div>
+            <div class="flex gap-2"><dt class="text-gray-500">이메일</dt><dd>[문의 이메일 확인 필요]</dd></div>
+            <div class="flex gap-2"><dt class="text-gray-500">운영시간</dt><dd>평일 09:00 - 18:00</dd></div>
+          </dl>
+        </div>
+        <nav aria-label="제품">
+          <p class="text-sm font-semibold uppercase tracking-wider text-gray-900">제품</p>
+          <ul class="mt-4 space-y-2">
+            <li><a href="#categories" class="text-sm text-gray-600 hover:text-brand">가정용</a></li>
+            <li><a href="#categories" class="text-sm text-gray-600 hover:text-brand">업소용</a></li>
+            <li><a href="#categories" class="text-sm text-gray-600 hover:text-brand">수거함</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="회사">
+          <p class="text-sm font-semibold uppercase tracking-wider text-gray-900">회사</p>
+          <ul class="mt-4 space-y-2">
+            <li><a href="#about" class="text-sm text-gray-600 hover:text-brand">회사소개</a></li>
+            <li><a href="#cases" class="text-sm text-gray-600 hover:text-brand">인증·설치사례</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="고객지원">
+          <p class="text-sm font-semibold uppercase tracking-wider text-gray-900">고객지원</p>
+          <ul class="mt-4 space-y-2">
+            <li><a href="#support" class="text-sm text-gray-600 hover:text-brand">고객센터</a></li>
+            <li><a href="#contact" class="text-sm text-gray-600 hover:text-brand">문의하기</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="mt-12 flex flex-col items-start justify-between gap-3 border-t border-gray-200 pt-6 text-xs text-gray-500 sm:flex-row sm:items-center">
+        <p>© <span id="year"></span> ECOSTA. All rights reserved.</p>
+        <p>본 문서는 외부팀 검토용 단일 HTML 프리뷰입니다.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 연도 자동
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 모바일 메뉴 토글
+    (function() {
+      var btn = document.getElementById('menu-btn');
+      var panel = document.getElementById('mobile-nav');
+      var iconOpen = document.getElementById('menu-icon-open');
+      var iconClose = document.getElementById('menu-icon-close');
+
+      function setOpen(open) {
+        btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+        panel.classList.toggle('hidden', !open);
+        iconOpen.classList.toggle('hidden', open);
+        iconClose.classList.toggle('hidden', !open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+
+      btn.addEventListener('click', function() {
+        var isOpen = btn.getAttribute('aria-expanded') === 'true';
+        setOpen(!isOpen);
+      });
+      panel.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') setOpen(false);
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') setOpen(false);
+      });
+    })();
+
+    // 데모 폼 (실제 전송 없음)
+    (function() {
+      var form = document.getElementById('inquiry-form');
+      var status = document.getElementById('form-status');
+      if (!form) return;
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        status.textContent = '문의가 접수되었습니다. (데모 — 실제 전송되지 않습니다)';
+        status.className = 'text-sm font-medium text-brand';
+        form.reset();
+      });
+    })();
+  </script>
+
+</body>
+</html>
