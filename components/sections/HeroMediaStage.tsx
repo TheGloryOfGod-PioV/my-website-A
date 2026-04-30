@@ -22,7 +22,7 @@ type Props = {
 export default function HeroMediaStage({ slides }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [durations, setDurations] = useState<number[]>(() => slides.map((slide) => slide.durationSec ?? 0));
+  const [durations, setDurations] = useState<number[]>(() => slides.map(() => 0));
   const [currentTime, setCurrentTime] = useState(0);
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
 
@@ -59,33 +59,49 @@ export default function HeroMediaStage({ slides }: Props) {
   }, [activeIndex, prefersReducedMotion]);
 
   useEffect(() => {
+    const cleanups: Array<() => void> = [];
+
+    videoRefs.current.forEach((video, index) => {
+      if (!video) return;
+
+      const syncDuration = () => {
+        const nextDuration = Number.isFinite(video.duration) ? video.duration : 0;
+        if (nextDuration <= 0) return;
+        setDurations((current) => {
+          if (Math.abs((current[index] ?? 0) - nextDuration) < 0.01) return current;
+          const next = [...current];
+          next[index] = nextDuration;
+          return next;
+        });
+      };
+
+      if (video.readyState >= 1 /* HAVE_METADATA */) {
+        syncDuration();
+      }
+      video.addEventListener("loadedmetadata", syncDuration);
+      cleanups.push(() => video.removeEventListener("loadedmetadata", syncDuration));
+    });
+
+    return () => cleanups.forEach((cleanup) => cleanup());
+  }, [slides]);
+
+  useEffect(() => {
     const activeVideo = videoRefs.current[activeIndex];
     if (!activeVideo) return;
 
     const syncTime = () => setCurrentTime(activeVideo.currentTime || 0);
-    const syncDuration = () => {
-      const nextDuration = Number.isFinite(activeVideo.duration) ? activeVideo.duration : 0;
-      setDurations((current) => {
-        const next = [...current];
-        next[activeIndex] = nextDuration;
-        return next;
-      });
-    };
     const handleEnded = () => {
       setCurrentTime(0);
       setActiveIndex((current) => (current + 1) % slides.length);
     };
 
     syncTime();
-    syncDuration();
 
     activeVideo.addEventListener("timeupdate", syncTime);
-    activeVideo.addEventListener("loadedmetadata", syncDuration);
     activeVideo.addEventListener("ended", handleEnded);
 
     return () => {
       activeVideo.removeEventListener("timeupdate", syncTime);
-      activeVideo.removeEventListener("loadedmetadata", syncDuration);
       activeVideo.removeEventListener("ended", handleEnded);
     };
   }, [activeIndex, slides.length]);
