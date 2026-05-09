@@ -50,12 +50,12 @@ export default function Hero() {
     <>
       <section
         aria-labelledby="hero-media-title"
-        className="corporate-frame relative min-h-[78svh] overflow-hidden border-b border-white/10 text-white"
+        className="corporate-frame relative min-h-[620px] overflow-hidden border-b border-white/10 text-white sm:min-h-[78svh]"
       >
         <HeroMediaStage slides={slides} />
         <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-slate-950 to-transparent" />
 
-        <Container className="relative flex min-h-[78svh] items-start px-5 pb-24 pt-32 sm:px-6 sm:pb-28 sm:pt-36 lg:px-8 lg:pb-32 lg:pt-40">
+        <Container className="relative flex min-h-[620px] items-end px-5 pb-32 pt-52 sm:min-h-[78svh] sm:px-6 sm:pb-28 sm:pt-36 lg:px-8 lg:pb-32 lg:pt-40">
           <div className="max-w-lg">
             <p id="hero-media-title" className="display-kicker text-xs font-semibold text-emerald-200 sm:text-sm">
               AI Generated Preview

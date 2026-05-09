@@ -162,19 +162,19 @@ export default function HeroMediaStage({ slides }: Props) {
         );
       })}
 
-      <div className="absolute left-5 right-5 top-8 z-20 sm:left-6 sm:right-6 lg:left-8 lg:right-8 lg:top-10">
-        <div className="flex flex-col gap-4">
+      <div className="absolute left-5 right-5 top-6 z-20 sm:left-6 sm:right-6 sm:top-8 lg:left-8 lg:right-8 lg:top-10">
+        <div className="flex max-w-xs flex-col gap-4 sm:max-w-sm">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-3">
               <p className="text-xs uppercase tracking-[0.18em] text-white">{statusLabel}</p>
             </div>
           </div>
 
-          <div className="max-w-xs">
+          <div>
             <p className="display-kicker text-[11px] font-semibold text-white sm:text-xs">
               {activeSlide.eyebrow}
             </p>
-            <p className="mt-3 text-sm leading-relaxed text-white/80">
+            <p className="mt-3 text-sm leading-relaxed text-white/80 sm:text-[15px]">
               {activeSlide.description}
             </p>
           </div>
