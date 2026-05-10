@@ -1,6 +1,5 @@
-import Link from "next/link";
-import RevealOnScroll from "@/components/motion/RevealOnScroll";
 import { categories } from "@/data/products";
+import CategoryImageFocusPanel from "./CategoryImageFocusPanel";
 import CategoryProgressRail from "./CategoryProgressRail";
 
 const items = [
@@ -12,6 +11,23 @@ const items = [
     description:
       "가정용 음식물처리기를 중심으로 소음, 위생, 설치 동선을 함께 고려한 생활형 솔루션입니다.",
     palette: "from-emerald-950 via-emerald-900 to-slate-950",
+    scenes: [
+      {
+        label: "Compact Kitchen",
+        caption: "싱크대와 조리 동선 사이에 부담 없이 들어오는 소형 설치 이미지",
+        tint: "bg-[linear-gradient(135deg,#e5f8ef,#47c790_44%,#0f766e)]",
+      },
+      {
+        label: "Quiet Routine",
+        caption: "생활 소음과 냄새 노출을 줄이는 주거형 위생 관리 이미지",
+        tint: "bg-[linear-gradient(135deg,#f8fafc,#a7f3d0_42%,#064e3b)]",
+      },
+      {
+        label: "Built-in Flow",
+        caption: "주방 수납 라인과 어긋나지 않는 빌트인 처리 흐름 이미지",
+        tint: "bg-[linear-gradient(135deg,#ecfccb,#34d399_46%,#0f172a)]",
+      },
+    ],
   },
   {
     key: "commercial" as const,
@@ -21,6 +37,23 @@ const items = [
     description:
       "매장, 급식, 식품 제조 환경에 맞춘 업소용 처리 설비로 처리량과 유지관리의 균형을 맞춥니다.",
     palette: "from-slate-950 via-slate-900 to-emerald-950",
+    scenes: [
+      {
+        label: "Back Kitchen",
+        caption: "조리실 후면에 배치되는 고용량 처리 설비 이미지",
+        tint: "bg-[linear-gradient(135deg,#dbeafe,#14b8a6_38%,#020617)]",
+      },
+      {
+        label: "Service Hours",
+        caption: "영업 시간의 흐름을 끊지 않는 연속 운영 이미지",
+        tint: "bg-[linear-gradient(135deg,#fef3c7,#22c55e_40%,#111827)]",
+      },
+      {
+        label: "Maintenance Bay",
+        caption: "점검과 세척 동선까지 열어두는 설비 관리 이미지",
+        tint: "bg-[linear-gradient(135deg,#f1f5f9,#38bdf8_36%,#065f46)]",
+      },
+    ],
   },
   {
     key: "containers" as const,
@@ -30,6 +63,23 @@ const items = [
     description:
       "수거함과 컨테이너 라인업으로 공동주택과 사업장의 배출 동선을 명확하게 정리합니다.",
     palette: "from-stone-950 via-slate-900 to-emerald-950",
+    scenes: [
+      {
+        label: "Drop-off Point",
+        caption: "사용자가 모이는 배출 지점을 명확히 잡아주는 수거함 이미지",
+        tint: "bg-[linear-gradient(135deg,#e0f2fe,#10b981_40%,#1c1917)]",
+      },
+      {
+        label: "Container Line",
+        caption: "용량별 컨테이너를 현장 규모에 맞춰 배열한 이미지",
+        tint: "bg-[linear-gradient(135deg,#f0fdf4,#84cc16_36%,#0f172a)]",
+      },
+      {
+        label: "Collection Route",
+        caption: "차량 진입과 리프팅 방향을 함께 고려한 수거 동선 이미지",
+        tint: "bg-[linear-gradient(135deg,#f8fafc,#2dd4bf_42%,#292524)]",
+      },
+    ],
   },
 ].map((item) => ({
   ...item,
@@ -63,55 +113,20 @@ export default function ProductCategorySection() {
 
       <div>
         {items.map((item) => (
-          <article
+          <CategoryImageFocusPanel
             key={item.key}
             id={item.panelId}
-            data-category-panel
-            data-category-id={item.panelId}
-            className={`relative flex min-h-[100svh] items-end overflow-hidden border-b border-white/10 bg-gradient-to-br ${item.palette}`}
-          >
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(255,255,255,0.12),transparent_20%),linear-gradient(135deg,rgba(255,255,255,0.04),transparent_40%)] animate-hero-drift motion-reduce:animate-none"
-            />
-            <div
-              aria-hidden="true"
-              className="absolute right-[4vw] top-[8vh] text-[20vw] font-black tracking-[-0.08em] text-white/[0.05]"
-            >
-              {item.index}
-            </div>
-
-            <div className="relative mx-auto grid w-full max-w-content gap-10 px-5 py-14 sm:px-6 sm:py-16 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:px-8 lg:py-20">
-              <RevealOnScroll as="div" tone="utility" className="self-start">
-                <p className="display-kicker text-xs font-semibold text-emerald-200 sm:text-sm">{item.eyebrow}</p>
-                <p className="mt-6 text-sm font-medium tracking-[0.18em] text-white/40">{item.index}</p>
-              </RevealOnScroll>
-
-              <RevealOnScroll as="div" tone="utility" delayMs={80} className="max-w-4xl">
-                <h3 className="text-4xl font-black leading-[1] tracking-[-0.05em] text-balance sm:text-5xl lg:text-[4.5rem]">
-                  {item.statement}
-                </h3>
-                <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/68 sm:text-lg">
-                  {item.description}
-                </p>
-                <div className="mt-10 flex flex-col gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-sm font-semibold text-white">{item.title}</p>
-                    <p className="mt-2 text-sm text-white/56">{item.subtitle}</p>
-                  </div>
-                  <Link
-                    href={item.href}
-                    className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[0.18em] text-emerald-200 transition-colors duration-500 ease-utility hover:text-white"
-                  >
-                    상세 보기
-                    <span aria-hidden="true" className="text-base">
-                      →
-                    </span>
-                  </Link>
-                </div>
-              </RevealOnScroll>
-            </div>
-          </article>
+            categoryId={item.panelId}
+            index={item.index}
+            eyebrow={item.eyebrow}
+            statement={item.statement}
+            description={item.description}
+            title={item.title}
+            subtitle={item.subtitle}
+            href={item.href}
+            palette={item.palette}
+            scenes={item.scenes}
+          />
         ))}
       </div>
     </section>
