@@ -14,7 +14,9 @@ export default function CorporateHeader() {
   const isHome = pathname === "/";
   const [isSolid, setIsSolid] = useState(!isHome);
   const [isDropdownOnDarkSection, setIsDropdownOnDarkSection] = useState(isHome);
+  const [isHomeTop, setIsHomeTop] = useState(isHome);
   const [progress, setProgress] = useState(0);
+  const useInitialHomeInk = isHome && isHomeTop && !isSolid;
   const useDarkDropdown = !isSolid || isDropdownOnDarkSection;
 
   useEffect(() => {
@@ -28,6 +30,7 @@ export default function CorporateHeader() {
       const y = window.scrollY;
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setIsSolid(!isHome || y > 120);
+      setIsHomeTop(isHome && y <= 4);
       setProgress(max > 0 ? Math.min(y / max, 1) : 0);
 
       if (!isHome) {
@@ -60,10 +63,12 @@ export default function CorporateHeader() {
         "sticky top-0 z-40 transition-[background-color,border-color,box-shadow,backdrop-filter,color] duration-700 ease-utility",
         isSolid
           ? "border-b border-black/10 bg-white/92 shadow-[0_10px_30px_rgba(15,23,42,0.06)] backdrop-blur supports-[backdrop-filter]:bg-white/80"
-          : "border-b border-white/10 bg-transparent text-white",
+          : useInitialHomeInk
+            ? "border-b border-black/10 bg-transparent text-slate-950"
+            : "border-b border-white/10 bg-transparent text-white",
       ].join(" ")}
     >
-      {!isSolid ? (
+      {!isSolid && !useInitialHomeInk ? (
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/42 via-black/18 to-transparent"
@@ -82,7 +87,9 @@ export default function CorporateHeader() {
             aria-hidden="true"
             className={[
               "grid h-9 w-9 place-items-center rounded-full border text-sm font-bold transition-colors duration-700 ease-utility",
-              isSolid ? "border-brand/20 bg-brand text-white" : "border-white/30 bg-white/12 text-white",
+              isSolid || useInitialHomeInk
+                ? "border-brand/20 bg-brand text-white"
+                : "border-white/30 bg-white/12 text-white",
             ].join(" ")}
           >
             P
@@ -91,7 +98,9 @@ export default function CorporateHeader() {
             <span
               className={[
                 "block text-base font-semibold tracking-[0.18em] transition-colors duration-700 ease-utility sm:text-lg",
-                isSolid ? "text-gray-950" : "text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.25)]",
+                isSolid || useInitialHomeInk
+                  ? "text-gray-950"
+                  : "text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.25)]",
               ].join(" ")}
             >
               {company.name}
@@ -99,7 +108,7 @@ export default function CorporateHeader() {
             <span
               className={[
                 "mt-1 block text-[11px] tracking-[0.22em] transition-colors duration-700 ease-utility sm:text-xs",
-                isSolid ? "text-gray-500" : "text-white/78",
+                isSolid || useInitialHomeInk ? "text-gray-500" : "text-white/78",
               ].join(" ")}
             >
               CORPORATE SOLUTIONS
@@ -115,7 +124,9 @@ export default function CorporateHeader() {
                   href={item.href}
                   className={[
                     "inline-flex items-center px-4 py-3 text-sm font-medium transition-colors duration-500 ease-utility",
-                    isSolid ? "text-gray-700 hover:text-brand" : "text-white/90 hover:text-white",
+                    isSolid || useInitialHomeInk
+                      ? "text-gray-700 hover:text-brand"
+                      : "text-white/90 hover:text-white",
                   ].join(" ")}
                 >
                   {item.label}
@@ -160,12 +171,12 @@ export default function CorporateHeader() {
         </nav>
 
         <div className="hidden lg:block">
-          <Button href="/contact" variant={isSolid ? "primary" : "white"}>
+          <Button href="/contact" variant={isSolid || useInitialHomeInk ? "primary" : "white"}>
             문의하기
           </Button>
         </div>
 
-        <MobileMenu isSolid={isSolid} />
+        <MobileMenu isSolid={isSolid || useInitialHomeInk} />
       </Container>
     </header>
   );
